@@ -578,33 +578,6 @@ impl<'info> LiquidityPoolAccount<'info> for Account<'info, LiquidityPool> {
         Ok(())
     }
 
-    // fn execute_sol_transfer(
-    //     &self,
-    //     recipient: &AccountInfo<'info>,
-    //     transfer_amount: u64,
-    //     system_program: &Program<'info, System>,
-    // ) -> Result<()> {
-    //     let pool_account = self.to_account_info();
-
-    //     let context = CpiContext::new_with_signer(
-    //         system_program.to_account_info(),
-    //         system_program::Transfer {
-    //             from: pool_account,
-    //             to: recipient.clone(),
-    //         },
-    //         &[&[
-    //             LiquidityPool::POOL_SEED_PREFIX.as_bytes(),
-    //             LiquidityPool::generate_seed(self.token_one.key(), self.token_two.key())
-    //                 .as_bytes(),
-    //             &[self.bump],
-    //         ]],
-    //     );
-
-    //     system_program::transfer(context, transfer_amount)?;
-
-    //     Ok(())
-    // }
-
     fn transfer_holaai_to_pool(
         &self,
         from: &Signer<'info>,
