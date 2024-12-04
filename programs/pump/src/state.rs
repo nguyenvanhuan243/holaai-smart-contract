@@ -172,7 +172,7 @@ pub trait LiquidityPoolAccount<'info> {
         token_program: &Program<'info, Token>,
     ) -> Result<()>;
 
-    fn transfer_sol_to_pool(
+    fn transfer_holaai_to_pool(
         &self,
         from: &Signer<'info>,
         to: &AccountInfo<'info>,
@@ -180,7 +180,7 @@ pub trait LiquidityPoolAccount<'info> {
         system_program: &Program<'info, System>,
     ) -> Result<()>;
 
-    fn transfer_sol_from_pool(
+    fn transfer_holaai_from_pool(
         &self,
         from: &AccountInfo<'info>,
         to: &AccountInfo<'info>,
@@ -452,7 +452,7 @@ impl<'info> LiquidityPoolAccount<'info> for Account<'info, LiquidityPool> {
                 token_program,
             )?;
            
-            self.transfer_sol_from_pool(
+            self.transfer_holaai_from_pool(
                 token_two_accounts.2,
                 token_two_accounts.1,
                 amount_out,
@@ -492,7 +492,7 @@ impl<'info> LiquidityPoolAccount<'info> for Account<'info, LiquidityPool> {
                 token_program,
             )?;
 
-            self.transfer_sol_to_pool(
+            self.transfer_holaai_to_pool(
                 token_two_accounts.2,
                 token_two_accounts.1,
                 amount,
@@ -529,33 +529,6 @@ impl<'info> LiquidityPoolAccount<'info> for Account<'info, LiquidityPool> {
         Ok(())
     }
 
-    // fn execute_token_transfer(
-    //     &self,
-    //     source: &Account<'info, TokenAccount>,
-    //     destination: &Account<'info, TokenAccount>,
-    //     transfer_amount: u64,
-    //     token_program: &Program<'info, Token>,
-    // ) -> Result<()> {
-    //     let context = CpiContext::new_with_signer(
-    //         token_program.to_account_info(),
-    //         token::Transfer {
-    //             from: source.to_account_info(),
-    //             to: destination.to_account_info(),
-    //             authority: self.to_account_info(),
-    //         },
-    //         &[&[
-    //             LiquidityPool::POOL_SEED_PREFIX.as_bytes(),
-    //             LiquidityPool::generate_seed(self.token_one.key(), self.token_two.key())
-    //                 .as_bytes(),
-    //             &[self.bump],
-    //         ]],
-    //     );
-
-    //     token::transfer(context, transfer_amount)?;
-
-    //     Ok(())
-    // }
-
     fn transfer_token_to_pool(
         &self,
         from: &Account<'info, TokenAccount>,
@@ -579,7 +552,7 @@ impl<'info> LiquidityPoolAccount<'info> for Account<'info, LiquidityPool> {
         Ok(())
     }
 
-    fn transfer_sol_from_pool(
+    fn transfer_holaai_from_pool(
         &self,
         from: &AccountInfo<'info>,
         to: &AccountInfo<'info>,
@@ -632,7 +605,7 @@ impl<'info> LiquidityPoolAccount<'info> for Account<'info, LiquidityPool> {
     //     Ok(())
     // }
 
-    fn transfer_sol_to_pool(
+    fn transfer_holaai_to_pool(
         &self,
         from: &Signer<'info>,
         to: &AccountInfo<'info>,
