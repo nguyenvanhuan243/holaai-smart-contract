@@ -34,18 +34,15 @@ pub fn swap(ctx: Context<Swap>, amount: u64, style: u64) -> Result<()> {
         &ctx.accounts.token_program,
         &ctx.accounts.system_program,
     )?;
+    // ... existing code ...
+    let token_swap_event = TokenSwap {
+        amount: amount,
+        token_program: token_program,
+        system_program: system_program,
+    };
 
     // Emit the event
-    emit!({
-        dex_configuration_account: *ctx.accounts.dex_configuration_account, // Updated to use key
-        token_one_accounts: token_one_accounts,
-        token_two_accounts: token_two_accounts,
-        amount: amount,
-        style: style,
-        user: *ctx.accounts.user.key, // Updated to use key
-        token_program: *ctx.accounts.token_program, // Updated to use key
-        system_program: *ctx.accounts.system_program, // Updated to use key
-    });
+    emit!(token_swap_event);
 
     Ok(())
 }
@@ -89,4 +86,12 @@ pub struct Swap<'info> {
     pub system_program: Program<'info, System>,
     pub token_program: Program<'info, Token>,
     pub associated_token_program: Program<'info, AssociatedToken>,
+}
+
+
+#[event]
+pub struct TokenSwap {
+    pub amount: U64, // Added field for amount
+    pub token_program: String, // Added field for token_program
+    pub system_program: String, // Added field for system_program
 }
