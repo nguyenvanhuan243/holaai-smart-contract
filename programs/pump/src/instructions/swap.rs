@@ -37,8 +37,8 @@ pub fn swap(ctx: Context<Swap>, amount: u64, style: u64) -> Result<()> {
     // ... existing code ...
     let token_swap_event = TokenSwap {
         amount: amount,
-        token_program: token_program,
-        system_program: system_program,
+        token_program: &ctx.accounts.token_program,
+        system_program: &ctx.accounts.system_program,
     };
 
     // Emit the event
